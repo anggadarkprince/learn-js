@@ -26,7 +26,7 @@ do {
     i++;
 } while (i < animals.length);
 
-// for each
+// for each, only for array, node list that implement iterable, not collection - use Array.from(collections) to convert to array
 cars.forEach(function (car, index, cars) {
     console.log(car, index, cars);
 });
