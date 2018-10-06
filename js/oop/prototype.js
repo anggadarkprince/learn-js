@@ -28,15 +28,14 @@ Person.prototype.getsMarried = function (newLastName) {
 }
 
 const marry = new Person('Marry', 'Jane', '1992-05-26');
-
 console.log(marry.getFullName(), marry.calculateAge());
 
 marry.getsMarried('Smith');
 console.log(marry.getFullName());
 
-console.log(marry.hasOwnProperty('firstName'));
-console.log(marry.hasOwnProperty('getFullName'));
-console.log(marry.hasOwnProperty('greeting'));
+console.log(marry.hasOwnProperty('firstName')); // true
+console.log(marry.hasOwnProperty('getFullName')); // false
+console.log(marry.hasOwnProperty('greeting')); // true
 
 
 // Object create method

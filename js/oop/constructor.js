@@ -1,5 +1,5 @@
 // constructor ES5
-function Person(name, birthday) {
+function User(name, birthday) {
     this.name = name;
     this.birthday = new Date(birthday);
     this.calculateAge = function () {
@@ -9,10 +9,10 @@ function Person(name, birthday) {
     }
 }
 
-const angga = new Person('Ari', '1992-05-26');
+const angga = new User('Ari', '1992-05-26');
 angga.name = 'Angga';
 
-const john = new Person('John', '1987-10-04');
+const john = new User('John', '1987-10-04');
 john.name = 'John Doe';
 
 console.log(angga.name, angga.calculateAge());
