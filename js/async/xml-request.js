@@ -48,10 +48,10 @@ document.getElementById('button-customer').addEventListener('click', function ()
     xhr.open('get', 'data/customer.json', true);
     xhr.onloadstart = function () {
         document.querySelector('.loading').style.visibility = 'visible';
-    }
+    };
     xhr.onloadend = function () {
         document.querySelector('.loading').style.visibility = 'hidden';
-    }
+    };
     xhr.onload = function () {
         if (this.status === 200) {
             var customer = JSON.parse(this.responseText);
@@ -64,10 +64,10 @@ document.getElementById('button-customer').addEventListener('click', function ()
                 </ul>
             `;
         }
-    }
+    };
     xhr.onerror = function () {
         console.log('Request error', this.status);
-    }
+    };
     xhr.send();
 });
 
@@ -77,10 +77,10 @@ document.getElementById('button-all-customers').addEventListener('click', functi
     xhr.open('get', 'data/customers.json', true);
     xhr.onloadstart = function () {
         document.querySelector('.loading').style.visibility = 'visible';
-    }
+    };
     xhr.onloadend = function () {
         document.querySelector('.loading').style.visibility = 'hidden';
-    }
+    };
     xhr.onload = function () {
         if (this.status === 200) {
             var customers = JSON.parse(this.responseText);
@@ -99,10 +99,10 @@ document.getElementById('button-all-customers').addEventListener('click', functi
             while (output.firstChild) output.removeChild(output.firstChild);
             output.appendChild(wrapper);
         }
-    }
+    };
     xhr.onerror = function () {
         console.log('Request error', this.status);
-    }
+    };
     xhr.send();
 });
 
@@ -114,10 +114,10 @@ document.getElementById('button-api').addEventListener('click', function () {
         xhr.open('get', 'http://api.icndb.com/jokes/random/' + totalJokes, true);
         xhr.onloadstart = function () {
             document.querySelector('.loading').style.visibility = 'visible';
-        }
+        };
         xhr.onloadend = function () {
             document.querySelector('.loading').style.visibility = 'hidden';
-        }
+        };
         xhr.onload = function () {
             if (this.status === 200) {
                 var results = JSON.parse(this.responseText);
@@ -133,10 +133,10 @@ document.getElementById('button-api').addEventListener('click', function () {
                     output.appendChild(wrapper);
                 }
             }
-        }
+        };
         xhr.onerror = function () {
             console.log('Request error', this.status);
-        }
+        };
         xhr.send();
     } else {
         alert('Please input correct value of jokes');

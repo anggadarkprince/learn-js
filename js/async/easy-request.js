@@ -17,7 +17,7 @@ var postData = {
     userId: 1,
     title: 'Hello world',
     body: 'Usto sed quo iure occaecati omnis eligendi aut ad'
-}
+};
 
 // Post a post
 document.getElementById('button-insert').addEventListener('click', function () {
