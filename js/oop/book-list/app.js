@@ -3,7 +3,7 @@ function BookList(book = []) {
     this.collections = book;
     this.addBook = function (book) {
         this.collections.push(book);
-    }
+    };
     this.getBook = function (isbn) {
         let book = null;
         this.collections.forEach(function (collection) {
@@ -12,7 +12,7 @@ function BookList(book = []) {
             }
         });
         return book;
-    }
+    };
     this.deleteBook = function (book) {
         let isFound = false;
         this.collections.forEach(function (collection, index, all) {
@@ -34,7 +34,7 @@ function Book(title, author, isbn) {
 
 // UI constructor
 function UI() {
-};
+}
 
 UI.prototype.addBookToList = function (book) {
     const list = document.getElementById('book-list');
@@ -53,7 +53,7 @@ UI.prototype.addBookToList = function (book) {
     if (bookList.collections.length) {
         document.getElementById('empty-label').style.display = 'none';
     }
-}
+};
 
 UI.prototype.showAlert = function (message, className) {
     const div = document.createElement('div');
@@ -66,13 +66,13 @@ UI.prototype.showAlert = function (message, className) {
     setTimeout(function () {
         document.querySelector('.alert').remove();
     }, 3000);
-}
+};
 
 UI.prototype.clearFields = function () {
     document.getElementById('title').value = '';
     document.getElementById('author').value = '';
     document.getElementById('isbn').value = '';
-}
+};
 
 UI.prototype.deleteBook = function (target) {
     if (target.classList.contains('delete')) {
@@ -80,7 +80,7 @@ UI.prototype.deleteBook = function (target) {
         return true;
     }
     return false;
-}
+};
 
 // Event listener
 document.getElementById('book-form').addEventListener('submit', function (e) {
