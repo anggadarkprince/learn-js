@@ -42,7 +42,7 @@ function getExternal() {
         .then(data => {
             console.log(data);
             let output = '';
-            data.forEach(function(user) {
+            data.forEach(function (user) {
                 output += `<li>${user.login}</li>`;
             });
             document.getElementById('output').innerHTML = output;
@@ -50,3 +50,26 @@ function getExternal() {
         })
         .catch(err => console.log(err));
 }
+
+// fetch() API only rejects a promise when a “network error is encountered,
+// although this usually means permissions issues or similar.”
+fetch("http://httpstat.us/500")
+    .then(function (data) {
+        console.log(data);
+    })
+    .catch(function (e) {
+        console.log(e);
+    });
+
+fetch("http://httpstat.us/500")
+    .then(function (response) {
+        if (!response.ok) { // force promise reject
+            throw Error(response.statusText);
+        }
+        return response;
+    })
+    .then(function (response) {
+        console.log("ok");
+    }).catch(function (error) {
+    console.log(error);
+});
