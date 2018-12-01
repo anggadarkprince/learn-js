@@ -31,8 +31,40 @@ var descNumbers = numbers.sort(function (a, b) {
 });
 console.log(descNumbers);
 
-// search value
+// search value by callback function condition
 var bellow50 = numbers.find(function (num) {
     return num < 50;
 });
 console.log(numbers, 'first value bellow 50 is', bellow50); // return undefined if not found
+
+// some function
+var array = [1, 2, 3, 4, 5];
+var even = function(element) {
+    return element % 2 === 0;
+};
+// expected output at least one of element is true: true
+console.log(array.some(even));
+
+
+// Every check is every single element of array meet condition (all return true)
+// all elements are greater than 4
+const greaterFour = array.every(function (num) {
+    return num > 4
+});
+console.log(greaterFour); // output: false
+
+// all elements are less than 10
+const lessTen = array.every(function (num) {
+    return num < 10;
+});
+console.log(lessTen); // output: true
+
+// convert to iterable object
+const name = 'angga';
+const nameArray = Array.from(name);
+//const lisArray = Array.from(document.querySelectorAll('li'));
+console.log(nameArray);
+
+// populate parameter into array
+const nums = Array.of(1, 2, 3, 4, 5, 6);
+console.log(nums); // output: [1, 2, 3, 4, 5, 6]
