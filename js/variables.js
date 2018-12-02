@@ -24,6 +24,7 @@ var lastName = 'Ari'; // camel case
 var first_name = 'Wijaya'; // snake case
 var FirstName = 'Tom'; // pascal case or studly caps
 
+// const and let it's new feature in ES2015 / ES6, see js folder
 // let (similar to var but cannot redeclare in the same scope, see js/scope.js)
 let title = 'John Doe';
 console.log(title);

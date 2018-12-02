@@ -19,5 +19,10 @@ set2.forEach((value) => {
     console.log(value);
 });
 
+// because set implement iterable we can loop with for-of
+for (let val of set2) {
+    console.log(val);
+}
+
 // convert to array
 console.log(Array.from(set2));

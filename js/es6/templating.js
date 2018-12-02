@@ -12,6 +12,14 @@ html =
     '</ul>';
 document.body.innerHTML += html;
 
+// use back tick to create template string
+// \ below escape new line, so we do not need unnecessary empty string
+let greeting = `Hello \
+Sunshine \
+You are
+beautiful`;
+console.log(greeting);
+
 function hello() {
     return 'Hello';
 }

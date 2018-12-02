@@ -25,7 +25,7 @@ for (let key of map1.keys()) {
     console.log(map1.get(key));
 }
 
-// Iterate value only
+// because map implement iterable we can loop with for-of
 for (let value of map1.values()) {
     console.log(value);
 }
