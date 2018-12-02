@@ -14,6 +14,8 @@ console.log(person1);
 
 // Customer constructor
 function Customer(firstName, lastName, phone, membership) {
+    // we inherit the constructor because we don't want if one of object change the parent property
+    // the all inherited objects would affected as well, so each child has their own property not pointing to parent
     Person.call(this, firstName, lastName);
 
     this.phone = phone;
@@ -21,9 +23,10 @@ function Customer(firstName, lastName, phone, membership) {
 }
 
 // Inherit the Person prototype method
-Customer.prototype = Object.create(Person.prototype);
+Customer.prototype = Object.create(Person.prototype); // or
+// Customer.prototype = new Person(); // but add additional unnecessary properties
 
-// Make customer.prototype return customer
+// Make customer.prototype return customer, recover the original constructor
 Customer.prototype.constructor = Customer;
 
 // create customer

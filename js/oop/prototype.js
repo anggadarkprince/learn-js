@@ -1,15 +1,22 @@
 // Object.prototype
 // Person.prototype
 
+// every function constructor has "prototype" (dunder proto) property and instance object has "__proto__" property which refer to origin constructor
+// Person.prototype === marry.__prototype__ will return true
+// when we call function or property of the object javascript will find into default property then
+// if not found then it finds into prototype object (this object will not checked by hasOwnProperty() method)
+
 function Person(firstName, lastName, birthday) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.birthday = new Date(birthday);
+    // this code bellow will redefined each new object was created
     this.greeting = function () {
         return 'Hello' + this.firstName;
     }
 }
 
+// using prototype based function definition will make definition once.
 // Calculate age
 Person.prototype.calculateAge = function () {
     const diff = Date.now() - this.birthday.getTime();
