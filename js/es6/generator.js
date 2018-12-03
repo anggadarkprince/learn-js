@@ -30,9 +30,9 @@ console.log(myName.next());
 console.log(myName.next());
 
 // ID creator
-function* createIds() {
+function* createIds(max = 5) {
     let index = 0;
-    while(true) {
+    while(index < max) {
         yield index++;
     }
 }
@@ -43,3 +43,7 @@ console.log(gen.next());
 console.log(gen.next());
 console.log(gen.next());
 console.log(gen.next());
+
+for (val of createIds(3)) {
+    console.log(val);
+}

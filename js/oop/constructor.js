@@ -10,6 +10,12 @@ function User(name, birthday) {
     return name; // it won't returned in "new" keyword
 }
 
+// static method
+User.hello = function () {
+    console.log('hello');
+}
+User.hello();
+
 const user = User('Rey', '2000-10-23'); // will return undefined if the function doesn't return anything
 // console.log(user.name); // this will not work, because we try to access name on undefined variable
 console.log(user); // if the function return something just print it out like general function
