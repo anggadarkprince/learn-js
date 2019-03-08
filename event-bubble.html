@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Handler</title>
+    <style>
+        body{
+            font-family: sans-serif;
+            line-height: 1.5;
+        }
+        ul li{
+            margin-bottom: 10px;
+        }
+        .div-container{
+            min-height: 100px;
+            padding: 20px;
+            border: 1px solid #333333;
+        }
+        h3{
+            margin: 0 0 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul>
+        <li><a href="#" onclick="alert('inline click'); return false;">Inline click</a></li>
+        <li>
+            <a href="#" id="simpleClickLink">Simple Click Event</a>
+        </li>
+        <li>
+            <a href="#" id="clickLink">Click Me</a>
+            <label for="checkbox">
+                <input type="checkbox" id="checkbox"> Toggle to enable click event
+            </label>
+        </li>
+    </ul>
+</div>
+
+<h3>Bubble event tracer</h3>
+<div id="div1" class="div-container">
+    <h3>Div 1</h3>
+    <div id="div2" class="div-container">
+        <h3>Div 2</h3>
+        <div id="div3" class="div-container">
+            <h3>Div 3</h3>
+        </div>
+    </div>
+</div>
+<script src="js/event.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif, Helvetica;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin: 0 0 20px;
+        }
+
+        .input {
+            margin-bottom: 10px;
+        }
+
+        label {
+            width: 130px;
+            display: inline-block;
+            vertical-align: top;
+            padding: 10px 0;
+        }
+
+        textarea, input[type=text], input[type=email], input[type=password], select {
+            width: 270px;
+            padding: 5px 8px;
+            font-family: sans-serif, Helvetica;
+        }
+
+        input[type=radio], input[type=checkbox] {
+            margin: 10px 5px;
+        }
+
+        button {
+            height: 38px;
+            padding: 5px 10px;
+            border-radius: 3px;
+            background: dodgerblue;
+            color: white;
+            border: none;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background: deepskyblue;
+        }
+
+        #results{
+            margin-top: 20px;
+        }
+
+        .container {
+            display: block;
+        }
+
+        [class*=col-] {
+            float: left;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        [class*=col-]:before,
+        [class*=col-]:after {
+            content: '';
+            display: table-cell;
+            clear: both;
+        }
+
+        .col-60 {
+            width: 60%;
+        }
+
+        .col-50 {
+            width: 50%;
+        }
+
+        .col-40 {
+            width: 40%;
+        }
+        .event{
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+<h2>Shopping Cart</h2>
+<form class="cart" id="cart-oil" method="post">
+    <div class="container">
+        <div class="col-40">
+            <div class="info">
+                <h3>Personal Profile</h3>
+                <p>Customer data</p>
+                <div class="input">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your full name"
+                           value="Angga Ari Wijaya" pattern="[A-Za-z'-\. ]{2,30}">
+                    <div class="event" id="name-press"></div>
+                    <div class="event" id="name-up"></div>
+                </div>
+                <div class="input">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Email address" multiple>
+                    <div class="event" id="email-change"></div>
+                </div>
+                <div class="input">
+                    <label for="contact">Contact</label>
+                    <input type="text" id="contact" placeholder="Phone">
+                </div>
+                <div class="input">
+                    <label for="male">Gender</label>
+                    <label for="male">
+                        <input type="radio" name="gender" id="male" value="male">
+                        Male
+                    </label>
+                    <label for="female">
+                        <input type="radio" name="gender" id="female" value="female">
+                        Female
+                    </label>
+                    <div class="event" id="gender-change"></div>
+                </div>
+                <div class="input">
+                    <label for="address">Address</label>
+                    <textarea rows="3" id="address" placeholder="Address"></textarea>
+                </div>
+                <div class="input">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="City" list="city-list">
+                    <datalist id="city-list">
+                        <option value="Gresik">
+                        <option value="Surabaya">
+                        <option value="Sidoarjo">
+                        <option value="Lamongan">
+                        <option value="Jember">
+                        <option value="Banyuwangi">
+                        <option value="Malang">
+                    </datalist>
+                </div>
+                <div class="input">
+                    <label for="country">Country</label>
+                    <select id="country">
+                        <option value="id" selected>Indonesia</option>
+                        <option value="sn">Singapore</option>
+                        <option value="my">Malaysia</option>
+                        <option value="ph">Philippine</option>
+                        <option value="th">Thailand</option>
+                        <option value="ls">Laos</option>
+                    </select>
+                    <div class="event" id="country-change"></div>
+                </div>
+                <div class="input">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="col-60">
+            <div class="cart">
+                <div class="item">
+                    <h3>Extra Virgin, Cold-Pressed</h3>
+                    <p>You've never tasted olive oil this delicious <strong>Price: $10/bottle</strong>.</p>
+                    <div class="order">
+                        <label for="quantity-extra">Quantity</label>
+                        <input type="text" id="quantity-extra" size="3" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="item">
+                    <h3>Cold-Pressed</h3>
+                    <p>Ideal for cooking <strong>Price: $8/bottle</strong>.</p>
+                    <div class="order">
+                        <label for="quantity-cold">Quantity</label>
+                        <input type="text" id="quantity-cold" size="3" placeholder="0">
+                    </div>
+                </div>
+
+                <div id="summary">
+                    <h3>Estimate Order</h3>
+                    <div class="input">
+                        <label for="state">State</label>
+                        <select id="state">
+                            <option value="">- select -</option>
+                            <option value="CA">California (7.5% tax)</option>
+                            <option value="IL">Illinois</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="PA">Pennsylvania</option>
+                        </select>
+                    </div>
+
+                    <div class="input">
+                        <label for="shipping-pickup">Shipping</label>
+
+                        <input type="radio" value="pickup" name="shipping" id="shipping-pickup" checked>
+                        <label for="shipping-pickup">Pickup <br>(free)</label>
+
+                        <input type="radio" value="usps" name="shipping" id="shipping-mail">
+                        <label for="shipping-mail">US Mail <br>($2/bottle)</label>
+
+                        <input type="radio" value="ups" name="shipping" id="shipping-ups">
+                        <label for="shipping-ups">UPS <br>($3/bottle)</label>
+                    </div>
+
+                    <div class="input">
+                        <label for="special-gift">Special:</label>
+
+                        <input type="checkbox" value="gift" id="special-gift">
+                        <label for="special-gift">This is a gift</label>
+
+                        <input type="checkbox" value="gold" id="special-gold">
+                        <label for="special-gold">Use gold bottles</label>
+
+                        <input type="checkbox" value="cork" id="special-cork">
+                        <label for="special-cork">Use plastic caps</label>
+                    </div>
+
+                    <div class="input"><br>
+                        <label for="btn-estimate">Estimate</label>
+                        <input type="text" id="estimate" placeholder="$0.00">
+                        <button type="submit" id="btn-estimate">Estimate Total</button>
+
+                        <div id="results"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="js/form.js"></script>
+</body>
+</html>
