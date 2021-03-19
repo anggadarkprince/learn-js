@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Stream</title>
+    </head>
+    <body>
+        <video autoplay width="100%"></video>
+        <button type="button" id="toggle-flashlight">Toggle Flashlight</button>
+        <button type="button" id="zoom-in">Zoom In</button>
+        <button type="button" id="zoom-out">Zoom Out</button>
+        <button type="button" id="take-image">Take Image</button>
+        <button type="button" id="take-photo">Take Photo</button>
+
+        <h5 style="margin-top: 15px">Captured Image</h5>
+        <img src="https://via.placeholder.com/150" style="border-radius: 10px; max-width: 100%; height: auto" id="photo-wrapper" alt="Photo">
+        <script>
+            const video = document.querySelector('video');
+            const btnToggleFlash = document.getElementById('toggle-flashlight');
+            const btnZoomIn = document.getElementById('zoom-in');
+            const btnZoomOut = document.getElementById('zoom-out');
+            const btnTakeImage = document.getElementById('take-image');
+            const btnTakePhoto = document.getElementById('take-photo');
+            const photoWrapper = document.getElementById('photo-wrapper');
+
+            let track;
+            let deviceCapabilities;
+            let imageCapture;
+            let isTorchOn = false; // some device cannot get current torch status, we create variable helper
+
+            btnToggleFlash.addEventListener('click', function () {
+                // check if video track is streamed, and support device torch and get current setting
+                if (track && imageCapture && deviceCapabilities.torch) {
+                    track.applyConstraints({
+                        advanced: [{
+                            torch: /*!imageCapture.track.getSettings().torch*/ !isTorchOn
+                        }]
+                    }).catch(e => console.log(e));
+
+                    if (imageCapture.track.getSettings().torch || isTorchOn) {
+                        this.innerText = 'Turn On Torchlight';
+                        isTorchOn = false;
+                    } else {
+                        this.innerText = 'Turn Off Torchlight';
+                        isTorchOn = true;
+                    }
+                }
+            });
+
+            btnZoomIn.addEventListener('click', function() {
+                if (track && imageCapture && imageCapture.track.getSettings().zoom < deviceCapabilities.zoom.max) {
+                    track.applyConstraints({
+                        advanced: [{
+                            zoom: imageCapture.track.getSettings().zoom + 1
+                        }]
+                    }).catch(e => console.log(e));
+                }
+            });
+
+            btnZoomOut.addEventListener('click', function() {
+                if (track && imageCapture && imageCapture.track.getSettings().zoom > deviceCapabilities.zoom.min) {
+                    track.applyConstraints({
+                        advanced: [{
+                            zoom: imageCapture.track.getSettings().zoom - 1
+                        }]
+                    }).catch(e => console.log(e));
+                }
+            });
+
+            btnTakeImage.addEventListener('click', function() {
+                const width = video.offsetWidth;
+                const height = video.offsetHeight;
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, width, height);
+                photoWrapper.src = canvas.toDataURL('image/png');
+            });
+
+            btnTakePhoto.addEventListener('click', function() {
+                imageCapture.takePhoto({
+                    fillLightMode: 'flash',
+                    imageHeight: 1500,
+                    imageWidth: 2000,
+                }).then(capturedPhoto => {
+                    photoWrapper.src = URL.createObjectURL(capturedPhoto);
+                })
+                .catch(e => console.log(e))
+
+            });
+
+            navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}})
+                .then((stream) => {
+                    video.srcObject = stream;
+
+                    // get the active track of the stream
+                    track = stream.getVideoTracks()[0];
+
+                    video.addEventListener('loadedmetadata', (e) => {
+                        window.setTimeout(() => (
+                            onCapabilitiesReady(track.getCapabilities())
+                        ), 500);
+                    });
+
+                    function onCapabilitiesReady(capabilities) {
+                        deviceCapabilities = capabilities;
+
+                        imageCapture = new ImageCapture(track);
+                        console.log(imageCapture.track.getSettings());
+                        imageCapture.getPhotoCapabilities().then(console.log);
+
+                        /*
+                        if (capabilities.zoom) {
+                            track.applyConstraints({
+                                advanced: [{zoom: capabilities.zoom.max}]
+                            })
+                                .catch(e => console.log(e));
+                        }
+                        if (capabilities.torch) {
+                            track.applyConstraints({
+                                advanced: [{torch: true}]
+                            })
+                                .catch(e => console.log(e));
+                        }
+                        */
+                    }
+                })
+                .catch(err => console.error('getUserMedia() failed: ', err));
+        </script>
+    </body>
+</html>

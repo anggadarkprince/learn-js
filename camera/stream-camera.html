@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stream</title>
+</head>
+<body>
+<div class="wrapper">
+    <video autoplay="true" id="video-webcam">
+        Please allow to access camera
+    </video>
+    <button onclick="takeSnapshot()">Take Image</button>
+</div>
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script>
+    const video = document.querySelector("#video-webcam");
+    navigator.mediaDevices.getUserMedia({ video: true/*, audio: true */ })
+		.then(stream => video.srcObject = stream)
+		.catch(e => alert(e.name + ": "+ e.message));
+  
+    function takeSnapshot() {
+        const img = document.createElement('img');
+        let context;
+        const width = video.offsetWidth;
+        const height = video.offsetHeight;
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, width, height);
+        img.src = canvas.toDataURL('image/png');
+        document.body.appendChild(img);
+    }
+</script>
+</body>
+</html>
