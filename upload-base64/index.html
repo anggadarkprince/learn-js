@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Base64 Encoded File</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="form-container">
+    <form id="form">
+        <label for="nameInput">Name</label>
+        <input type="text" id="nameInput" name="name" placeholder="Full name"/>
+
+        <label for="messageInput">Message</label>
+        <textarea
+                id="messageInput"
+                cols="30"
+                rows="2"
+                name="message"
+                placeholder="Input your message"></textarea>
+
+        <label for="file-input">File</label>
+        <input type="file" id="file-input" name="file" multiple/>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<div class="data-holder">
+    <p>DATA:</p>
+    <pre id="code"></pre>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
